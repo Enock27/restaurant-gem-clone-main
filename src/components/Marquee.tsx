@@ -27,7 +27,7 @@ export function Marquee({ items }: { items: string[] }) {
           
           if (rect.top < windowHeight && rect.bottom > 0) {
             const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-            setScrollOffset(scrollProgress * 50);
+            setScrollOffset(scrollProgress * 120);
           }
           ticking = false;
         });
@@ -50,8 +50,8 @@ export function Marquee({ items }: { items: string[] }) {
       <div 
         className="flex whitespace-nowrap mb-6 sm:mb-8 md:mb-12"
         style={{
-          transform: isHydrated ? `translateX(${scrollOffset * 0.8}px)` : 'translateX(0)',
-          transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          transform: isHydrated ? `translateX(${scrollOffset * 2}px)` : 'translateX(0)',
+          transition: "transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           willChange: "transform"
         }}
       >
@@ -70,8 +70,8 @@ export function Marquee({ items }: { items: string[] }) {
       <div 
         className="flex whitespace-nowrap"
         style={{
-          transform: isHydrated ? `translateX(-${scrollOffset * 0.8}px)` : 'translateX(0)',
-          transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          transform: isHydrated ? `translateX(-${scrollOffset * 2}px)` : 'translateX(0)',
+          transition: "transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           willChange: "transform"
         }}
       >
