@@ -34,7 +34,6 @@ export function SiteFooter() {
             <h4 className="text-xs tracking-[0.25em] uppercase text-gold mb-4">Navigate</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/menu" className="text-muted-foreground hover:text-gold transition-colors">Menu</Link></li>
-              <li><Link to="/rooms" className="text-muted-foreground hover:text-gold transition-colors">Rooms</Link></li>
               <li><Link to="/about" className="text-muted-foreground hover:text-gold transition-colors">About</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-gold transition-colors">Contact</Link></li>
             </ul>

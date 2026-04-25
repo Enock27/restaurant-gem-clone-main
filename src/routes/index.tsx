@@ -7,13 +7,9 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { useState, useEffect } from "react";
 import interiorStairs from "@/assets/interior-stairs.jpg";
 import dishPlate from "@/assets/dish-plate.jpg";
-import diningRoom from "@/assets/dining-room.jpg";
-import dishCaviar from "@/assets/dish-caviar.jpg";
-import dishRendang from "@/assets/dish-rendang.jpg";
-import dishLobster from "@/assets/dish-lobster.jpg";
 import suiteGarden from "@/assets/suite-garden.jpg";
-import suiteTower from "@/assets/suite-tower.jpg";
 import logo from "@/assets/AfriPot_logo2.png";
+import backgroundHero from "@/assets/BackgroundHero1.jpg";
 import vid1 from "@/assets/vid1.mp4";
 import vid3 from "@/assets/vid3.mp4";
 import vid4 from "@/assets/vid4.mp4";
@@ -21,14 +17,6 @@ import vid4 from "@/assets/vid4.mp4";
 export const Route = createFileRoute("/")({
   component: Index,
 });
-
-function Stars() {
-  return (
-    <div className="flex items-center gap-3 text-gold text-3xl">
-      <span>✦</span><span>✦</span>
-    </div>
-  );
-}
 
 function Index() {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -74,34 +62,34 @@ function Index() {
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 40%, rgba(21,21,21,0.92) 65%, rgba(21,21,21,0.97) 100%)" }} />
 
         {/* Content */}
-        <div className="relative z-10 flex h-full flex-col justify-between px-6 md:px-12 py-8 max-w-[1600px] mx-auto">
+        <div className="relative z-10 flex h-full flex-col justify-between px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-8 md:py-12 max-w-[1600px] mx-auto w-full">
 
           {/* Bottom-right content block */}
           <div className="flex-1 flex items-center justify-end">
-            <div className="w-full max-w-[480px] animate-fade-up">
+            <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[480px] animate-fade-up">
               <h1 className="leading-[1.1]">
-                <span className="block text-[clamp(2.5rem,6vw,5rem)] text-white font-serif font-normal tracking-tight">
+                <span className="block text-[clamp(1.5rem,5vw,3rem)] text-white font-serif font-normal tracking-tight">
                   Restaurant
                 </span>
                 <span className="block text-[clamp(1rem,3vw,2.5rem)] font-indie font-bold tracking-tight mt-2">
                   <span className="text-green-400">Afri</span><span className="text-white">Pot</span>
-                  <span className="text-white ml-3">Cuisine</span>
+                  <span className="text-white ml-2 sm:ml-3">Cuisine</span>
                 </span>
               </h1>
 
-              <p className="mt-8 text-sm md:text-base text-white/80 leading-relaxed max-w-[340px]">
+              <p className="mt-4 sm:mt-6 md:mt-8 text-xs sm:text-sm md:text-base text-white/80 leading-relaxed max-w-xs sm:max-w-sm">
                 Where tradition meets taste
               </p>
 
               {/* Michelin flower icons */}
-              <div className="mt-7 flex items-center gap-4">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-label="Michelin star" xmlns="http://www.w3.org/2000/svg">
+              <div className="mt-4 sm:mt-6 md:mt-7 flex items-center gap-3 sm:gap-4">
+                <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-label="Michelin star" className="sm:w-9 sm:h-9" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="18" cy="18" r="4" fill="white"/>
                   {[0,45,90,135,180,225,270,315].map((deg, i) => (
                     <ellipse key={i} cx="18" cy="9" rx="3.5" ry="5.5" fill="white" transform={`rotate(${deg} 18 18)`} opacity="0.9"/>
                   ))}
                 </svg>
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-label="Michelin star" xmlns="http://www.w3.org/2000/svg">
+                <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-label="Michelin star" className="sm:w-9 sm:h-9" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="18" cy="18" r="4" fill="white"/>
                   {[0,45,90,135,180,225,270,315].map((deg, i) => (
                     <ellipse key={i} cx="18" cy="9" rx="3.5" ry="5.5" fill="white" transform={`rotate(${deg} 18 18)`} opacity="0.9"/>
@@ -112,13 +100,13 @@ function Index() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-end pb-2">
+          <div className="flex items-end justify-end pb-2 sm:pb-3 md:pb-4">
             <Link
               to="/contact"
-              className="flex items-center gap-3 bg-gold text-gold-foreground pl-5 pr-4 py-3 text-xs tracking-[0.2em] uppercase rounded-full hover:bg-amber-600 transition-colors shadow-elegant"
+              className="flex items-center gap-2 sm:gap-3 bg-gold text-gold-foreground pl-3 sm:pl-4 md:pl-5 pr-2 sm:pr-3 md:pr-4 py-2 sm:py-3 text-xs tracking-[0.2em] uppercase rounded-full hover:bg-amber-600 transition-colors shadow-elegant"
             >
-              <span>Reserveer een tafel</span>
-              <span className="w-7 h-7 bg-gold-foreground/20 rounded-full flex items-center justify-center text-base">🎟</span>
+              <span className="text-xs sm:text-sm">Reserveer een tafel</span>
+              <span className="w-6 h-6 sm:w-7 sm:h-7 bg-gold-foreground/20 rounded-full flex items-center justify-center text-sm">🎟</span>
             </Link>
           </div>
         </div>
@@ -126,18 +114,18 @@ function Index() {
         {/* Vertical "AfriPot" badge on far right */}
         <Link 
           to="/"
-          className="fixed right-0 top-[45%] z-50 bg-black text-white flex flex-col items-center justify-center py-4 px-1.5 gap-2 hover:bg-gray-900 transition-colors" 
+          className="fixed right-0 top-[45%] z-50 bg-black text-white flex flex-col items-center justify-center py-3 sm:py-4 px-1 gap-1 sm:gap-2 hover:bg-gray-900 transition-colors" 
         >
           <div className="relative">
             <img 
               src={logo} 
               alt="AfriPot logo" 
-              className="w-12 h-12 object-contain brightness-125"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain brightness-125"
             />
           </div>
           <div style={{ writingMode: "vertical-rl", letterSpacing: "0.05em" }} className="text-center">
-            <span className="text-xs font-playful font-semibold block">AfriPot</span>
-            <span className="text-[10px] font-playful font-normal block mt-0.5">Cuisine</span>
+            <span className="text-[10px] sm:text-xs font-playful font-semibold block">AfriPot</span>
+            <span className="text-[8px] sm:text-[10px] font-playful font-normal block mt-0.5">Cuisine</span>
           </div>
         </Link>
       </section>
@@ -182,8 +170,22 @@ function Index() {
       </section>
 
       {/* JOURNEY */}
-      <section className="relative py-32 px-6 md:px-12 bg-card/40 border-y border-border/40">
-        <div className="mx-auto max-w-[1400px] text-center">
+      <section className="relative py-32 px-6 md:px-12 overflow-hidden">
+        {/* Fixed Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${backgroundHero})`,
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center'
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+
+        {/* Content - Scrolls Over Background */}
+        <div className="relative z-10 mx-auto max-w-[1400px] text-center">
           <p className="text-xs tracking-[0.4em] uppercase text-gold mb-6">The Journey Menu</p>
           <h2 className="font-serif text-5xl md:text-7xl max-w-4xl mx-auto leading-tight">
             Around the world, <em className="text-gradient-gold">one plate at a time</em>
@@ -192,30 +194,9 @@ function Index() {
             Our six-course journey traces Soenil's path from Paramaribo to Provence, finished with Brabant warmth and paired wines poured at the perfect moment.
           </p>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              { title: "European Lobster", subtitle: "Atlantic waters", img: dishLobster },
-              { title: "Eel & Spinach", subtitle: "Smoked & glazed", img: dishPlate },
-              { title: "Rendang", subtitle: "Chef's signature", img: dishRendang },
-            ].map((d) => (
-              <div key={d.title} className="group cursor-pointer">
-                <div className="overflow-hidden">
-                  <img
-                    src={d.img}
-                    alt={d.title}
-                    loading="lazy"
-                    className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <p className="mt-6 text-xs tracking-[0.3em] uppercase text-gold">{d.subtitle}</p>
-                <h3 className="mt-2 font-serif text-2xl">{d.title}</h3>
-              </div>
-            ))}
-          </div>
-
           <Link
             to="/menu"
-            className="mt-16 inline-block bg-gold text-gold-foreground px-10 py-4 text-xs tracking-[0.3em] uppercase hover:bg-foreground transition-colors"
+            className="mt-10 inline-block bg-gold text-gold-foreground px-10 py-4 text-xs tracking-[0.3em] uppercase hover:bg-foreground transition-colors"
           >
             View our menu
           </Link>
@@ -225,87 +206,53 @@ function Index() {
       {/* SIGNATURE */}
       <section className="py-32 px-6 md:px-12">
         <div className="mx-auto max-w-[1400px]">
-          <div className="flex items-end justify-between mb-16 flex-wrap gap-4">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            {/* Left - Menu Items */}
             <div>
-              <p className="text-xs tracking-[0.4em] uppercase text-gold mb-4">À la carte additions</p>
-              <h2 className="font-serif text-5xl md:text-6xl">Signature Dishes</h2>
-            </div>
-            <Link to="/menu" className="text-xs tracking-[0.3em] uppercase text-gold border-b border-gold pb-1 hover:text-foreground hover:border-foreground transition-colors">
-              See full card →
-            </Link>
-          </div>
+              <p className="text-xs tracking-[0.4em] uppercase text-gold mb-12">À la carte additions</p>
+              <h2 className="font-serif text-5xl md:text-6xl mb-16">Signature Dishes</h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <article className="group relative overflow-hidden bg-card">
-              <img src={dishCaviar} alt="Caviar 30 grams" loading="lazy" className="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="p-8">
-                <p className="text-xs tracking-[0.3em] uppercase text-gold mb-2">Luxurious start</p>
-                <div className="flex items-baseline justify-between">
-                  <h3 className="font-serif text-3xl">Caviar 30 grams</h3>
-                  <span className="font-serif text-3xl text-gold">95</span>
+              <div className="space-y-8">
+                <div className="border-b border-border/40 pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
+                  <h3 className="font-serif text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">European Lobster</h3>
                 </div>
-              </div>
-            </article>
 
-            <article className="group relative overflow-hidden bg-card">
-              <img src={dishRendang} alt="Rendang" loading="lazy" className="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="p-8">
-                <p className="text-xs tracking-[0.3em] uppercase text-gold mb-2">Chef's signature</p>
-                <div className="flex items-baseline justify-between">
-                  <h3 className="font-serif text-3xl">Rendang</h3>
-                  <span className="font-serif text-3xl text-gold">45</span>
+                <div className="border-b border-border/40 pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
+                  <h3 className="font-serif text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Eel</h3>
                 </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
 
-      {/* SUITES */}
-      <section className="relative">
-        <div className="grid lg:grid-cols-2">
-          <div className="relative h-[60vh] lg:h-auto min-h-[500px]">
-            <img src={suiteTower} alt="The Donjon Tower Suite" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-background/30" />
-          </div>
-          <div className="bg-card flex items-center px-6 md:px-16 py-24">
-            <div className="max-w-lg">
-              <p className="text-xs tracking-[0.4em] uppercase text-gold mb-6">Stay the night</p>
-              <h2 className="font-serif text-5xl md:text-6xl leading-tight">
-                Sleep inside the <em className="text-gradient-gold">castle</em>
-              </h2>
-              <p className="mt-8 text-lg text-muted-foreground leading-relaxed">
-                Two intimate suites within Kasteel Gemert: the medieval Donjon Tower and the serene Garden Suite overlooking the castle grounds.
-              </p>
+                <div className="border-b border-border/40 pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
+                  <h3 className="font-serif text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Spinach</h3>
+                </div>
 
-              <div className="mt-12 space-y-6">
-                <Link to="/rooms" className="flex items-center justify-between border-b border-border/60 pb-4 group">
-                  <div>
-                    <h3 className="font-serif text-2xl">The Donjon Tower Suite</h3>
-                    <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mt-1">Medieval stone walls</p>
-                  </div>
-                  <span className="text-gold group-hover:translate-x-1 transition-transform">→</span>
-                </Link>
-                <Link to="/rooms" className="flex items-center justify-between border-b border-border/60 pb-4 group">
-                  <div>
-                    <h3 className="font-serif text-2xl">The Garden Suite</h3>
-                    <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mt-1">Castle garden view</p>
-                  </div>
-                  <span className="text-gold group-hover:translate-x-1 transition-transform">→</span>
-                </Link>
+                <div className="border-b border-border/40 pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
+                  <h3 className="font-serif text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Caviar 30 grams</h3>
+                </div>
+
+                <div className="border-b border-border/40 pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
+                  <h3 className="font-serif text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Rendang</h3>
+                </div>
               </div>
 
               <Link
-                to="/contact"
-                className="mt-12 inline-block border border-gold text-gold px-10 py-4 text-xs tracking-[0.3em] uppercase hover:bg-gold hover:text-gold-foreground transition-all"
+                to="/menu"
+                className="mt-12 inline-block text-xs tracking-[0.3em] uppercase text-gold border-b border-gold pb-1 hover:text-foreground hover:border-foreground transition-colors"
               >
-                Book our rooms
+                See full card →
               </Link>
+            </div>
+
+            {/* Right - Image */}
+            <div className="hidden lg:block">
+              <img 
+                src={suiteGarden} 
+                alt="Signature Dishes" 
+                loading="lazy" 
+                className="w-full aspect-[4/5] object-cover shadow-elegant"
+              />
             </div>
           </div>
         </div>
-        <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2 pointer-events-none" />
-        <img src={suiteGarden} alt="Garden Suite" loading="lazy" className="hidden" />
       </section>
 
       {/* MARQUEE 2 */}

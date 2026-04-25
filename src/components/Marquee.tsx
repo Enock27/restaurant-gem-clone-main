@@ -1,36 +1,45 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 
 export function Marquee({ items }: { items: string[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollOffset, setScrollOffset] = useState(0);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Memoize the loop to prevent unnecessary recalculations
+  const loop = useMemo(() => [...items, ...items, ...items, ...items], [items]);
+  
+  // Memoize split items
+  const line1Items = useMemo(() => loop.filter((_, i) => i % 2 === 0), [loop]);
+  const line2Items = useMemo(() => loop.filter((_, i) => i % 2 === 1), [loop]);
 
   useEffect(() => {
+    setIsHydrated(true);
+    
+    let ticking = false;
+    
     const handleScroll = () => {
-      if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // Check if element is in viewport
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        // Calculate scroll offset relative to when element enters viewport
-        const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-        setScrollOffset(scrollProgress * 50); // Reduced from 100 to 50 for slower speed
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!containerRef.current) return;
+          
+          const rect = containerRef.current.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
+            setScrollOffset(scrollProgress * 50);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
     
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Create enough items for seamless loop
-  const loop = [...items, ...items, ...items, ...items];
-  
-  // Split items into two lines
-  const line1Items = loop.filter((_, i) => i % 2 === 0);
-  const line2Items = loop.filter((_, i) => i % 2 === 1);
 
   return (
     <div 
@@ -39,19 +48,20 @@ export function Marquee({ items }: { items: string[] }) {
     >
       {/* Line 1 - moves right on scroll down */}
       <div 
-        className="flex whitespace-nowrap mb-12"
+        className="flex whitespace-nowrap mb-6 sm:mb-8 md:mb-12"
         style={{
-          transform: `translateX(${scrollOffset * 0.8}px)`, // Reduced multiplier for slower movement
-          transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)" // Smoother easing
+          transform: isHydrated ? `translateX(${scrollOffset * 0.8}px)` : 'translateX(0)',
+          transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          willChange: "transform"
         }}
       >
         {line1Items.map((item, i) => (
           <span 
             key={`line1-${i}`} 
-            className="font-sekuya text-5xl md:text-7xl lg:text-8xl px-12 flex items-center gap-8 text-outline-light"
+            className="font-sekuya text-2xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl px-4 sm:px-6 md:px-8 lg:px-12 flex items-center gap-4 sm:gap-6 md:gap-8 text-outline-light"
           >
             {item}
-            <span className="inline-flex items-center justify-center w-3 h-3 rounded-full border-2 border-gold/25"></span>
+            <span className="inline-flex items-center justify-center w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full border border-gold/25 sm:border-2"></span>
           </span>
         ))}
       </div>
@@ -60,17 +70,18 @@ export function Marquee({ items }: { items: string[] }) {
       <div 
         className="flex whitespace-nowrap"
         style={{
-          transform: `translateX(-${scrollOffset * 0.8}px)`, // Reduced multiplier for slower movement
-          transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)" // Smoother easing
+          transform: isHydrated ? `translateX(-${scrollOffset * 0.8}px)` : 'translateX(0)',
+          transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          willChange: "transform"
         }}
       >
         {line2Items.map((item, i) => (
           <span 
             key={`line2-${i}`} 
-            className="font-sekuya text-5xl md:text-7xl lg:text-8xl px-12 flex items-center gap-8 text-outline-light"
+            className="font-sekuya text-2xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl px-4 sm:px-6 md:px-8 lg:px-12 flex items-center gap-4 sm:gap-6 md:gap-8 text-outline-light"
           >
             {item}
-            <span className="inline-flex items-center justify-center w-3 h-3 rounded-full border-2 border-gold/25"></span>
+            <span className="inline-flex items-center justify-center w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full border border-gold/25 sm:border-2"></span>
           </span>
         ))}
       </div>

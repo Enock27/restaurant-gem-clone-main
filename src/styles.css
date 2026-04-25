@@ -347,7 +347,7 @@ html {
 /* Lighter outlined text for marquee */
 .text-outline-light {
   color: transparent;
-  -webkit-text-stroke: 1px rgba(181, 140, 103, 0.25);
-  text-stroke: 1px rgba(181, 140, 103, 0.25);
+  -webkit-text-stroke: 1.5px rgba(181, 140, 103, 0.5);
+  text-stroke: 1.5px rgba(181, 140, 103, 0.5);
   font-weight: 400;
 }
