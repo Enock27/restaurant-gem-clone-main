@@ -147,29 +147,36 @@ function Index() {
 
       {/* STORY */}
       <section className="py-32 px-6 md:px-12">
-        <div className="mx-auto max-w-[1400px] grid lg:grid-cols-2 gap-20 items-center">
-          <ScrollReveal>
-            <p className="text-xs tracking-[0.4em] uppercase text-gold mb-6">Our Story</p>
-            <h2 className="font-serif text-5xl md:text-6xl leading-tight">
-              Where cultural heritage meets <em className="text-gradient-gold">culinary excellence</em>
-            </h2>
-            <p className="mt-8 text-lg text-muted-foreground leading-relaxed">
-              We layer Surinamese-Hindustani spices, French precision and Dutch seasonal produce into dishes that feel both familiar and daring. Every plate tells a story — and ends with a smile.
-            </p>
-            <Link
-              to="/about"
-              className="mt-10 inline-block border-b border-gold text-gold pb-1 text-xs tracking-[0.3em] uppercase hover:border-foreground hover:text-foreground transition-colors"
-            >
-              Read our story →
-            </Link>
-          </ScrollReveal>
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid lg:grid-cols-3 gap-8 items-center">
+            {/* Left Image */}
+            <ScrollReveal>
+              <img src={interiorStairs} alt="Antique staircase and wine cabinet" loading="lazy" className="w-full aspect-[3/4] object-cover shadow-elegant" />
+            </ScrollReveal>
 
-          <div className="grid grid-cols-2 gap-4">
-            <img src={interiorStairs} alt="Antique staircase and wine cabinet" loading="lazy" className="w-full aspect-[3/4] object-cover shadow-elegant" />
-            <div className="space-y-4 mt-12">
-              <img src={dishPlate} alt="Plated signature dish" loading="lazy" className="w-full aspect-square object-cover shadow-elegant" />
-              <img src={diningRoom} alt="Elegant dining room" loading="lazy" className="w-full aspect-square object-cover shadow-elegant" />
-            </div>
+            {/* Center Content */}
+            <ScrollReveal>
+              <div className="text-center">
+                <p className="text-xs tracking-[0.4em] uppercase text-gold mb-6">Our Story</p>
+                <h2 className="font-serif text-4xl md:text-5xl leading-tight">
+                  Where cultural heritage meets <em className="text-gradient-gold">culinary excellence</em>
+                </h2>
+                <p className="mt-8 text-base text-muted-foreground leading-relaxed">
+                  We layer Surinamese-Hindustani spices, French precision and Dutch seasonal produce into dishes that feel both familiar and daring. Every plate tells a story — and ends with a smile.
+                </p>
+                <Link
+                  to="/about"
+                  className="mt-10 inline-block border-b border-gold text-gold pb-1 text-xs tracking-[0.3em] uppercase hover:border-foreground hover:text-foreground transition-colors"
+                >
+                  Read our story →
+                </Link>
+              </div>
+            </ScrollReveal>
+
+            {/* Right Image */}
+            <ScrollReveal>
+              <img src={dishPlate} alt="Plated signature dish" loading="lazy" className="w-full aspect-[3/4] object-cover shadow-elegant" />
+            </ScrollReveal>
           </div>
         </div>
       </section>
