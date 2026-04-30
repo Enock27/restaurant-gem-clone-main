@@ -4,15 +4,13 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Marquee } from "@/components/Marquee";
 import { PageLoader } from "@/components/PageLoader";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { PartnersSection } from "@/components/PartnersSection";
 import { useState, useEffect } from "react";
 import interiorStairs from "@/assets/interior-stairs.jpg";
 import dishPlate from "@/assets/dish-plate.jpg";
 import suiteGarden from "@/assets/suite-garden.jpg";
 import logo from "@/assets/AfriPot_logo2.png";
 import backgroundHero from "@/assets/BackgroundHero1.jpg";
-import staffordLogo from "@/assets/STAFFORD COFFEE BREWERS LOGO.png";
-import anithLogo from "@/assets/Anitha.png";
-import afriPotLogo from "@/assets/AfriPot_logo2.png";
 import vid1 from "@/assets/vid1.mp4";
 import vid3 from "@/assets/vid3.mp4";
 import vid4 from "@/assets/vid4.mp4";
@@ -262,53 +260,7 @@ function Index() {
       <Marquee items={["AfriPot Restaurant", "Cultural Heritage", "Where Tradition Meets Taste"]} />
 
       {/* PARTNERS */}
-      <section className="py-20 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 md:px-8 lg:px-12 bg-white">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="text-center mb-16 sm:mb-20 md:mb-24">
-            <p className="text-[0.65rem] sm:text-xs tracking-[0.4em] uppercase text-gold mb-4 sm:mb-6">Our Partners</p>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-foreground mb-4 sm:mb-6">Trusted by the best</h2>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-              We collaborate with industry leaders to bring you the finest culinary experience
-            </p>
-          </div>
-          
-          <div className="partners-grid-3">
-            {/* Stafford Coffee Brewers */}
-            <ScrollReveal>
-              <div className="flex items-center justify-center h-32 sm:h-40 md:h-48">
-                <img 
-                  src={staffordLogo} 
-                  alt="Stafford Coffee Brewers" 
-                  className="partner-logo max-h-full max-w-full object-contain"
-                />
-              </div>
-            </ScrollReveal>
-
-            {/* Anitha */}
-            <ScrollReveal>
-              <div className="flex items-center justify-center h-32 sm:h-40 md:h-48">
-                <img 
-                  src={anithLogo} 
-                  alt="Anitha" 
-                  className="partner-logo max-h-full max-w-full object-contain"
-                />
-              </div>
-            </ScrollReveal>
-
-            {/* AfriPot */}
-            <ScrollReveal>
-              <div className="flex items-center justify-center h-32 sm:h-40 md:h-48 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-black/20 rounded-lg" />
-                <img 
-                  src={afriPotLogo} 
-                  alt="AfriPot" 
-                  className="partner-logo max-h-full max-w-full object-contain relative z-10"
-                />
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      <PartnersSection />
 
       {/* NEWSLETTER */}
       <section className="py-16 sm:py-20 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-12">
