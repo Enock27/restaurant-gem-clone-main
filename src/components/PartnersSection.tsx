@@ -14,6 +14,7 @@ interface PartnerLogoProps {
 const PartnerLogo: React.FC<PartnerLogoProps> = ({ src, alt, index }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   useEffect(() => {
     if (!containerRef.current || !imageRef.current) return;
@@ -41,42 +42,8 @@ const PartnerLogo: React.FC<PartnerLogoProps> = ({ src, alt, index }) => {
       }
     );
 
-    // Framer Motion hover effect with GSAP
-    const handleMouseEnter = () => {
-      gsap.to(imageRef.current, {
-        scale: 1.15,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-
-      // GSAP: Glow effect on hover
-      gsap.to(containerRef.current, {
-        boxShadow: "0 0 30px rgba(217, 119, 6, 0.6)",
-        duration: 0.6,
-        ease: "power2.out",
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to(imageRef.current, {
-        scale: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-
-      gsap.to(containerRef.current, {
-        boxShadow: "0 0 0px rgba(217, 119, 6, 0)",
-        duration: 0.4,
-        ease: "power2.out",
-      });
-    };
-
-    containerRef.current.addEventListener("mouseenter", handleMouseEnter);
-    containerRef.current.addEventListener("mouseleave", handleMouseLeave);
-
     return () => {
-      containerRef.current?.removeEventListener("mouseenter", handleMouseEnter);
-      containerRef.current?.removeEventListener("mouseleave", handleMouseLeave);
+      gsap.killTweensOf(containerRef.current);
     };
   }, [index]);
 
@@ -84,14 +51,40 @@ const PartnerLogo: React.FC<PartnerLogoProps> = ({ src, alt, index }) => {
     <motion.div
       ref={containerRef}
       className="flex items-center justify-center h-32 sm:h-40 md:h-48 rounded-lg transition-all duration-300 cursor-pointer group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -10 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      <img
+      <motion.img
         ref={imageRef}
         src={src}
         alt={alt}
         className="partner-logo max-h-full max-w-full object-contain filter group-hover:brightness-110 transition-all duration-300"
+        animate={{
+          y: isHovered ? 0 : [0, -8, 0],
+          rotateZ: isHovered ? 0 : [0, 2, -2, 0],
+          scale: isHovered ? 1.2 : 1,
+        }}
+        transition={{
+          y: {
+            duration: 4,
+            repeat: isHovered ? 0 : Infinity,
+            ease: "easeInOut",
+          },
+          rotateZ: {
+            duration: 5,
+            repeat: isHovered ? 0 : Infinity,
+            ease: "easeInOut",
+          },
+          scale: {
+            duration: 0.3,
+            ease: "easeOut",
+          },
+        }}
+        whileHover={{
+          filter: "brightness(1.3) drop-shadow(0 0 20px rgba(217, 119, 6, 0.6))",
+        }}
       />
     </motion.div>
   );
@@ -243,7 +236,7 @@ export const PartnersSection: React.FC = () => {
 
           <motion.h2
             ref={titleRef}
-            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-foreground mb-4 sm:mb-6"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-gray-900 mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -254,7 +247,7 @@ export const PartnersSection: React.FC = () => {
 
           <motion.p
             ref={subtitleRef}
-            className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto"
+            className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -301,7 +294,7 @@ export const PartnersSection: React.FC = () => {
           viewport={{ once: true }}
         >
           <motion.p
-            className="text-xs sm:text-sm text-muted-foreground tracking-[0.2em] uppercase"
+            className="text-xs sm:text-sm text-gray-700 tracking-[0.2em] uppercase"
             animate={{
               opacity: [0.6, 1, 0.6],
             }}

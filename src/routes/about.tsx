@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import diningRoom from "@/assets/dining-room.jpg";
-import interior from "@/assets/interior-stairs.jpg";
+import diningRoom from "@/assets/afri5.jpg";
+import interior from "@/assets/afri4.jpg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -43,15 +43,15 @@ function AboutPage() {
       <section className="px-6 md:px-12 pb-32">
         <div className="mx-auto max-w-[1400px] grid md:grid-cols-2 gap-6">
           <img src={interior} alt="Wine staircase" loading="lazy" className="w-full aspect-[4/5] object-cover shadow-elegant" />
-          <img src={diningRoom} alt="Dining room" loading="lazy" className="w-full aspect-[4/5] object-cover shadow-elegant md:mt-20" />
+          <img src={diningRoom} alt="Dining room" loading="lazy" className="w-full aspect-[4/5] object-cover shadow-elegant" />
         </div>
       </section>
 
       <section className="bg-card/40 border-y border-border/40 py-32 px-6 md:px-12 text-center">
         <p className="text-xs tracking-[0.4em] uppercase text-gold mb-6">Recognition</p>
         <div className="flex items-center justify-center gap-6 text-gold text-6xl">✦ ✦</div>
-        <h2 className="mt-6 font-serif text-4xl md:text-5xl">Two Michelin Stars</h2>
-        <p className="mt-4 text-muted-foreground">Awarded continuously since 2009</p>
+        <h2 className="mt-6 font-serif text-4xl md:text-5xl">Culinary Excellence</h2>
+        <p className="mt-4 text-muted-foreground">Celebrated for authentic African cuisine</p>
       </section>
 
       <SiteFooter />

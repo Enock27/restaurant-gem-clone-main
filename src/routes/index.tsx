@@ -6,14 +6,19 @@ import { PageLoader } from "@/components/PageLoader";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { PartnersSection } from "@/components/PartnersSection";
 import { useState, useEffect } from "react";
-import interiorStairs from "@/assets/interior-stairs.jpg";
-import dishPlate from "@/assets/dish-plate.jpg";
+import interiorStairs from "@/assets/Afri3.jpg";
+import dishPlate from "@/assets/afri2.jpg";
 import suiteGarden from "@/assets/suite-garden.jpg";
 import logo from "@/assets/AfriPot_logo2.png";
 import backgroundHero from "@/assets/BackgroundHero1.jpg";
 import vid1 from "@/assets/vid1.mp4";
 import vid3 from "@/assets/vid3.mp4";
 import vid4 from "@/assets/vid4.mp4";
+import chomaImg from "@/assets/choma.jpg";
+import luwomboImg from "@/assets/Chicken_Luwombo.JPG";
+import tilapiaImg from "@/assets/TILAPIA.jpg";
+import grillsImg from "@/assets/mixedgrills.jpg";
+import riceImg from "@/assets/AfripotRice.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -21,6 +26,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [currentVideo, setCurrentVideo] = useState(0);
+  const [selectedDish, setSelectedDish] = useState("mbuzi");
   const videos = [vid1, vid3, vid4];
 
   useEffect(() => {
@@ -29,6 +35,61 @@ function Index() {
     }, 8000); // Change video every 8 seconds
     return () => clearInterval(interval);
   }, []);
+
+  // Dish carousel component
+  const DishCarousel = ({ selectedDish }: { selectedDish: string }) => {
+    const dishes = {
+      mbuzi: { img: chomaImg, alt: "Mbuzi Choma" },
+      luwombo: { img: luwomboImg, alt: "Chicken Luwombo" },
+      tilapia: { img: tilapiaImg, alt: "Grilled Fish Tilapia" },
+      grills: { img: grillsImg, alt: "Mixed Grills" },
+      rice: { img: riceImg, alt: "AfriPot Rice" },
+    };
+
+    const currentDish = dishes[selectedDish as keyof typeof dishes] || dishes.mbuzi;
+
+    return (
+      <div className="relative w-full aspect-[16/10] overflow-hidden rounded-lg shadow-elegant">
+        <img
+          key={selectedDish}
+          src={currentDish.img}
+          alt={currentDish.alt}
+          className="w-full h-full object-cover animate-in fade-in zoom-in duration-500"
+          style={{
+            animation: "fadeInZoom 0.6s ease-out forwards",
+          }}
+        />
+      </div>
+    );
+  };
+
+  // Dish menu item component
+  const DishMenuItem = ({ 
+    name, 
+    isActive, 
+    onClick 
+  }: { 
+    name: string; 
+    isActive: boolean; 
+    onClick: () => void;
+  }) => (
+    <div
+      onClick={onClick}
+      className={`border-b pb-4 sm:pb-5 md:pb-6 group cursor-pointer transition-all duration-300 ${
+        isActive ? "border-gold" : "border-border/40 hover:border-gold"
+      }`}
+    >
+      <h3
+        className={`font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl transition-all duration-300 ${
+          isActive
+            ? "text-gold translate-x-2"
+            : "text-white group-hover:text-gold group-hover:translate-x-2"
+        }`}
+      >
+        {name}
+      </h3>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -148,16 +209,16 @@ function Index() {
               <div className="text-center px-2 sm:px-4">
                 <p className="text-[0.65rem] sm:text-xs tracking-[0.4em] uppercase text-gold mb-4 sm:mb-6">Our Story</p>
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
-                  Where cultural heritage meets <em className="text-gradient-gold">culinary excellence</em>
+                  Authentic African flavors from <em className="text-gradient-gold">the heart of Kigali</em>
                 </h2>
                 <p className="mt-4 sm:mt-6 md:mt-8 text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
-                  We layer Surinamese-Hindustani spices, French precision and Dutch seasonal produce into dishes that feel both familiar and daring. Every plate tells a story — and ends with a smile.
+                  At AfriPot, we celebrate the rich culinary traditions of Rwanda and across Africa. Our kitchen honors time-tested recipes while embracing modern techniques, creating dishes that connect you to our heritage. Every meal is a journey through authentic flavors, warmth, and genuine hospitality.
                 </p>
                 <Link
                   to="/about"
                   className="mt-6 sm:mt-8 md:mt-10 inline-block border-b border-gold text-gold pb-1 text-[0.65rem] sm:text-xs tracking-[0.3em] uppercase hover:border-foreground hover:text-foreground transition-colors"
                 >
-                  Read our story →
+                  Read our story
                 </Link>
               </div>
             </ScrollReveal>
@@ -210,47 +271,48 @@ function Index() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
             {/* Left - Menu Items */}
             <div>
-              <p className="text-[0.65rem] sm:text-xs tracking-[0.4em] uppercase text-gold mb-8 sm:mb-10 md:mb-12">À la carte additions</p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-10 md:mb-12 lg:mb-16">Signature Dishes</h2>
+              <p className="text-[0.65rem] sm:text-xs tracking-[0.4em] uppercase text-gold mb-8 sm:mb-10 md:mb-12">Signature Selections</p>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-10 md:mb-12 lg:mb-16">Our Favorites</h2>
 
               <div className="space-y-6 sm:space-y-7 md:space-y-8">
-                <div className="border-b border-border/40 pb-4 sm:pb-5 md:pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
-                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">European Lobster</h3>
-                </div>
-
-                <div className="border-b border-border/40 pb-4 sm:pb-5 md:pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
-                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Eel</h3>
-                </div>
-
-                <div className="border-b border-border/40 pb-4 sm:pb-5 md:pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
-                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Spinach</h3>
-                </div>
-
-                <div className="border-b border-border/40 pb-4 sm:pb-5 md:pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
-                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Caviar 30 grams</h3>
-                </div>
-
-                <div className="border-b border-border/40 pb-4 sm:pb-5 md:pb-6 group cursor-pointer transition-all duration-300 hover:border-gold">
-                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-white group-hover:text-gold transition-colors duration-300 group-hover:translate-x-2">Rendang</h3>
-                </div>
+                <DishMenuItem 
+                  name="Mbuzi Choma" 
+                  isActive={selectedDish === "mbuzi"}
+                  onClick={() => setSelectedDish("mbuzi")}
+                />
+                <DishMenuItem 
+                  name="Chicken Luwombo" 
+                  isActive={selectedDish === "luwombo"}
+                  onClick={() => setSelectedDish("luwombo")}
+                />
+                <DishMenuItem 
+                  name="Grilled Fish Tilapia" 
+                  isActive={selectedDish === "tilapia"}
+                  onClick={() => setSelectedDish("tilapia")}
+                />
+                <DishMenuItem 
+                  name="Mixed Grills" 
+                  isActive={selectedDish === "grills"}
+                  onClick={() => setSelectedDish("grills")}
+                />
+                <DishMenuItem 
+                  name="AfriPot Rice" 
+                  isActive={selectedDish === "rice"}
+                  onClick={() => setSelectedDish("rice")}
+                />
               </div>
 
               <Link
                 to="/menu"
                 className="mt-8 sm:mt-10 md:mt-12 inline-block text-[0.65rem] sm:text-xs md:text-sm tracking-[0.3em] uppercase text-gold border-b border-gold pb-1 hover:text-foreground hover:border-foreground transition-colors"
               >
-                See full card →
+                Explore full menu
               </Link>
             </div>
 
-            {/* Right - Image */}
+            {/* Right - Carousel Image */}
             <div className="hidden lg:block">
-              <img 
-                src={suiteGarden} 
-                alt="Signature Dishes" 
-                loading="lazy" 
-                className="w-full aspect-[4/5] object-cover shadow-elegant"
-              />
+              <DishCarousel selectedDish={selectedDish} />
             </div>
           </div>
         </div>

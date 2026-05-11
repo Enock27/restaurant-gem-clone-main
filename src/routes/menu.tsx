@@ -464,9 +464,8 @@ const menuCategories = [
   },
 ];
 
-// Menu Item Card Component
+// Menu Item Card Component - Simple & Clean Design
 function MenuItemCard({ item, index }: { item: any; index: number }) {
-  const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -474,16 +473,16 @@ function MenuItemCard({ item, index }: { item: any; index: number }) {
 
     gsap.fromTo(
       cardRef.current,
-      { opacity: 0, y: 60 },
+      { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        delay: index * 0.15,
+        duration: 0.5,
+        delay: index * 0.1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: cardRef.current,
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none none",
         },
       }
@@ -493,102 +492,48 @@ function MenuItemCard({ item, index }: { item: any; index: number }) {
   return (
     <motion.div
       ref={cardRef}
-      onClick={() => setIsFlipped(!isFlipped)}
-      className="relative h-80 cursor-pointer perspective"
-      style={{ perspective: "1000px" }}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3 }}
+      className="bg-zinc-900 border border-amber-900/40 rounded-lg p-5 hover:border-amber-700/60 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-amber-900/20"
     >
-      <motion.div
-        initial={false}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-        style={{ transformStyle: "preserve-3d" }}
-        className="w-full h-full"
-      >
-        {/* Front of card */}
+      {/* Badge */}
+      {item.badge && (
         <motion.div
-          style={{ backfaceVisibility: "hidden" }}
-          className="absolute w-full h-full bg-zinc-900 rounded-2xl overflow-hidden border border-amber-900/30 shadow-lg"
+          animate={{ y: [0, -2, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className={`inline-block mb-3 px-2.5 py-1 rounded-full text-xs font-semibold ${
+            item.badge === "chef"
+              ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+              : "bg-red-500/20 text-red-300 border border-red-500/40"
+          }`}
         >
-          {/* Placeholder image background */}
-          <div className="w-full h-3/5 bg-gradient-to-b from-amber-900 to-zinc-900 relative overflow-hidden group">
-            <motion.div
-              className="w-full h-full bg-gradient-to-br from-amber-700 to-amber-900"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            />
-            {item.badge && (
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold ${
-                  item.badge === "chef"
-                    ? "bg-amber-500 text-zinc-900"
-                    : "bg-red-500 text-white"
-                }`}
-              >
-                {item.badge === "chef" ? "Chef's Pick" : "New"}
-              </motion.div>
-            )}
-          </div>
-
-          {/* Card content */}
-          <div className="p-4 h-2/5 flex flex-col justify-between">
-            <div>
-              <h3 className="font-serif text-lg text-white font-semibold truncate">
-                {item.name}
-              </h3>
-              <p className="text-xs text-amber-200/70 line-clamp-2 mt-1">
-                {item.desc}
-              </p>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="font-serif text-xl text-amber-400">
-                {item.price} RWF
-              </span>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-3 py-1 bg-amber-500 text-zinc-900 text-xs font-semibold rounded-md hover:bg-amber-400 transition-colors"
-              >
-                Add
-              </motion.button>
-            </div>
-          </div>
+          {item.badge === "chef" ? "⭐ Chef's Pick" : "✨ New"}
         </motion.div>
+      )}
 
-        {/* Back of card */}
-        <motion.div
-          style={{ backfaceVisibility: "hidden", rotateY: 180 }}
-          className="absolute w-full h-full bg-zinc-800 rounded-2xl overflow-hidden border border-amber-900/30 shadow-lg p-4 flex flex-col justify-between"
+      {/* Item Name */}
+      <h3 className="font-serif text-lg font-semibold text-white mb-2 leading-tight">
+        {item.name}
+      </h3>
+
+      {/* Description */}
+      <p className="text-sm text-amber-100/70 mb-4 line-clamp-2 leading-relaxed">
+        {item.desc}
+      </p>
+
+      {/* Price and Button */}
+      <div className="flex items-center justify-between pt-3 border-t border-amber-900/30">
+        <span className="font-serif text-lg font-bold text-amber-400">
+          {item.price} RWF
+        </span>
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-zinc-900 text-sm font-semibold rounded-md transition-colors duration-200"
         >
-          <div>
-            <h3 className="font-serif text-lg text-white font-semibold mb-3">
-              {item.name}
-            </h3>
-            <div className="space-y-2 text-xs text-amber-100">
-              <p>
-                <span className="text-amber-400 font-semibold">Description:</span>{" "}
-                {item.desc}
-              </p>
-              <p>
-                <span className="text-amber-400 font-semibold">Allergens:</span>{" "}
-                May contain nuts, dairy, gluten
-              </p>
-              <p>
-                <span className="text-amber-400 font-semibold">Calories:</span>{" "}
-                ~450 cal
-              </p>
-            </div>
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full py-2 bg-amber-500 text-zinc-900 font-semibold rounded-md hover:bg-amber-400 transition-colors"
-          >
-            Add to Order
-          </motion.button>
-        </motion.div>
-      </motion.div>
+          Add
+        </motion.button>
+      </div>
     </motion.div>
   );
 }
@@ -835,7 +780,7 @@ function MenuPage() {
                 <h2 className="font-serif text-4xl md:text-5xl mb-12 text-amber-400">
                   {currentCategory.name}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {currentCategory.items.map((item: any, idx: number) => (
                     <MenuItemCard key={idx} item={item} index={idx} />
                   ))}
